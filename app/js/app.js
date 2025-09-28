@@ -33,15 +33,14 @@ function displayPhones(phones) {
         phoneDiv.classList.add('phone', 'rounded-lg', 'shadow-lg');
         phoneDiv.id = 'phone';
         phoneDiv.innerHTML = `
-        <div class="card bg-base-100  shadow-sm">
+        <div class="card bg-base-100  shadow-sm mt-16">
   <figure>
     <img
       src=${phone.image} />
   </figure>
   <div class="card-body">
-    <h2 class="card-title items-center">${phone.phone_name}</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div class="card-actions justify-end">
+    <h2 class="flex justify-center m-10 card-title">${phone.phone_name}</h2>
+    <div class=" card-actions justify-end">
       <button class="btn btn-primary w-full bg-amber-500 text-white 
         
       }">Buy Now</button>
