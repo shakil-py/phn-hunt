@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+    </style>
 
 <head>
     <meta charset="UTF-8">
@@ -17,8 +22,12 @@
     <!-- search -->
     <section>
         <input id="search-phn" placeholder="Search.." type="text">
-        <button onclick="searchPhone()" class="btn btn-primary">Search</button>
+        <button onclick="searchPhone(), loadspiner() " class="btn btn-primary">Search</button>
+
     </section>
+    <div class="text-center my-5 hidden" id="loader">
+        <span class="loading loading-bars loading-xl"></span>
+    </div>
     <section id="phone-container" class="grid grid-cols-3 gap-y-2 gap-x-5"></section>
 
 
