@@ -10,7 +10,11 @@ const loadPhone = async (searchText) => {
   displayPhones(data.data);
 
 };
-
+showall = () => {
+  const searchField = document.getElementById('search-phn');
+  const searchText = searchField.value;
+  loadPhone(searchText);
+}
 
 function displayPhones(searchText) {
   const phoneContainer = document.getElementById('phone-container');
@@ -24,7 +28,7 @@ function displayPhones(searchText) {
   else {
     btn.classList.add('hidden');
   }
-  
+
   for (const phone of searchText) {
     console.log(phone);
     const phoneDiv = document.createElement('div');
