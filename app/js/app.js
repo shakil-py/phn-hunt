@@ -1,40 +1,40 @@
 // console.log("hello world");
 const loadPhone = async (searchText) => {
-  const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
-  const data = await response.json();
+    const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
+    const data = await response.json();
 
-  if (data.length == 0) {
-    alert('no result found');
+    if (data.length == 0) {
+        alert('no result found');
 
-  }
-  displayPhones(data.data);
+    }
+    displayPhones(data.data);
 
 };
 showall = () => {
-  const searchField = document.getElementById('search-phn');
-  const searchText = searchField.value;
-  loadPhone(searchText);
+    const searchField = document.getElementById('search-phn');
+    const searchText = searchField.value;
+    loadPhone(searchText);
 }
 
 function displayPhones(searchText) {
-  const phoneContainer = document.getElementById('phone-container');
-  phoneContainer.textContent = '';
-  const phonelength = searchText.length;
-  const btn = document.getElementById('show-all-btn');
-  if (phonelength > 10) {
-    btn.classList.remove('hidden');
-    searchText = searchText.slice(0, 12);
-  }
-  else {
-    btn.classList.add('hidden');
-  }
+    const phoneContainer = document.getElementById('phone-container');
+    phoneContainer.textContent = '';
+    const phonelength = searchText.length;
+    const btn = document.getElementById('show-all-btn');
+    if (phonelength > 10) {
+        btn.classList.remove('hidden');
+        searchText = searchText.slice(0, 12);
+    }
+    else {
+        btn.classList.add('hidden');
+    }
 
-  for (const phone of searchText) {
-    console.log(phone);
-    const phoneDiv = document.createElement('div');
-    phoneDiv.classList.add('phone', 'rounded-lg', 'shadow-lg');
-    phoneDiv.id = 'phone';
-    phoneDiv.innerHTML = `
+    for (const phone of searchText) {
+        console.log(phone);
+        const phoneDiv = document.createElement('div');
+        phoneDiv.classList.add('phone', 'rounded-lg', 'shadow-lg');
+        phoneDiv.id = 'phone';
+        phoneDiv.innerHTML = `
         <div class="card bg-white  shadow-sm mt-16">
     <figure>
     <img class="w-1/2 h-1/2 mt-5"
@@ -50,30 +50,30 @@ function displayPhones(searchText) {
   </div>
 </div>
     `;
-    phoneContainer.appendChild(phoneDiv);
+        phoneContainer.appendChild(phoneDiv);
 
-  }
+    }
 
 
 };
 
 const searchPhone = async () => {
-  loadspiner(true);
-  const searchField = document.getElementById('search-phn');
-  const searchText = searchField.value;
-  searchField.value = '';
-  loadPhone(searchText);
+    loadspiner(true);
+    const searchField = document.getElementById('search-phn');
+    const searchText = searchField.value;
+    searchField.value = '';
+    loadPhone(searchText);
 };
 
 const loadspiner = (isLoading) => {
-  const loaderSection = document.getElementById('loader');
-  // loaderSection.classList.remove('hidden');
-  if (isLoading) {
-    loaderSection.classList.remove('hidden');
+    const loaderSection = document.getElementById('loader');
+    // loaderSection.classList.remove('hidden');
+    if (isLoading) {
+        loaderSection.classList.remove('hidden');
 
-  }
-  else {
-    loaderSection.classList.add('hidden');
+    }
+    else {
+        loaderSection.classList.add('hidden');
 
-  }
+    }
 }
