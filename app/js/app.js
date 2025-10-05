@@ -3,6 +3,7 @@ const loadPhone = async (searchText) => {
   const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
   const data = await response.json();
   displayPhones(data.data);
+  
 };
 
 function displayPhones(searchText) {
@@ -32,10 +33,10 @@ function displayPhones(searchText) {
     phoneContainer.appendChild(phoneDiv);
 
   }
-  loadspiner(false);
-
+  // loadspiner(false);
 
 };
+
 const searchPhone = async () => {
   loadspiner(true);
   const searchField = document.getElementById('search-phn');
@@ -44,12 +45,15 @@ const searchPhone = async () => {
   loadPhone(searchText);
 };
 
-const loadspiner = isLoading => {
+const loadspiner = (isLoading) => {
   const loaderSection = document.getElementById('loader');
+  // loaderSection.classList.remove('hidden');
   if (isLoading) {
     loaderSection.classList.remove('hidden');
+    
   }
   else {
     loaderSection.classList.add('hidden');
+    
   }
 }
