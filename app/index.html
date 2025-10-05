@@ -12,18 +12,22 @@
 </head>
 
 
-<body class="bg-slate-50 h-screen">
+<body class="bg-slate-50 h-auto ">
     <h2 class="font-bold text-center text-3xl gap-5 mt-5">hi this is my frist dynamice web site
     </h2>
     <!-- search -->
     <section class="text-center my-5">
         <input class="p-3 rounded-lg font-bold" id="search-phn" placeholder="Search.." type="text">
         <button onclick="searchPhone(), loadspiner() " class="btn btn-primary">Search</button>
-
     </section>
+
     <div class="text-center mt-20 hidden " id="loader">
         <span class="loading loading-bars loading-xl bg-black"></span>
     </div>
+    <!-- show All -->
+     <div class="text-center hidden" id="show-all-btn">
+        <button onclick="showAll()" class=" btn btn-secondary">Show All</button>
+     </div>
     <section id="phone-container" class="grid grid-cols-3 gap-y-2 gap-x-5"></section>
 
 

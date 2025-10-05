@@ -2,13 +2,29 @@
 const loadPhone = async (searchText) => {
   const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
   const data = await response.json();
+
+  if (data.length == 0) {
+    alert('no result found');
+
+  }
   displayPhones(data.data);
-  
+
 };
+
 
 function displayPhones(searchText) {
   const phoneContainer = document.getElementById('phone-container');
   phoneContainer.textContent = '';
+  const phonelength = searchText.length;
+  const btn = document.getElementById('show-all-btn');
+  if (phonelength > 10) {
+    btn.classList.remove('hidden');
+    searchText = searchText.slice(0, 12);
+  }
+  else {
+    btn.classList.add('hidden');
+  }
+  
   for (const phone of searchText) {
     console.log(phone);
     const phoneDiv = document.createElement('div');
@@ -33,7 +49,7 @@ function displayPhones(searchText) {
     phoneContainer.appendChild(phoneDiv);
 
   }
-  // loadspiner(false);
+
 
 };
 
@@ -50,10 +66,10 @@ const loadspiner = (isLoading) => {
   // loaderSection.classList.remove('hidden');
   if (isLoading) {
     loaderSection.classList.remove('hidden');
-    
+
   }
   else {
     loaderSection.classList.add('hidden');
-    
+
   }
 }
