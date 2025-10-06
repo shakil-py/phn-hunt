@@ -40,9 +40,9 @@ function displayPhones(phones, ishowAll) {
   <div class="card-body">
     <h2 class="flex justify-center m-10 card-title font-black text-black">${phone.phone_name}</h2>
     <div class=" card-actions justify-end">
-      <button class="btn btn-primary w-full bg-amber-500 text-white 
+      <button onclick="displayPhoneDetails()" class="btn btn-primary w-full bg-amber-500 text-white 
         
-      }">Buy Now</button>
+      }">showdetails</button>
     </div>
   </div>
 </div>
@@ -52,6 +52,12 @@ function displayPhones(phones, ishowAll) {
     }
 
 
+};
+const loadPhoneDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayPhoneDetails(data.data);
 };
 
 const searchPhone = async (ishowAll) => {
