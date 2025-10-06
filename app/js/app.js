@@ -1,35 +1,32 @@
 // console.log("hello world");
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, ishowAll) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await response.json();
-
-    if (data.length == 0) {
-        alert('no result found');
-
-    }
-    displayPhones(data.data);
+    const phones = data.data;
+    displayPhones(phones, ishowAll);
 
 };
-showall = () => {
-    const searchField = document.getElementById('search-phn');
-    const searchText = searchField.value;
-    loadPhone(searchText);
-}
 
-function displayPhones(searchText) {
+
+function displayPhones(phones, ishowAll) {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
-    const phonelength = searchText.length;
+    const phonelength = phones.length;
     const btn = document.getElementById('show-all-btn');
     if (phonelength > 10) {
         btn.classList.remove('hidden');
-        searchText = searchText.slice(0, 12);
+
     }
     else {
         btn.classList.add('hidden');
     }
-
-    for (const phone of searchText) {
+    if (!ishowAll) {
+        phones = phones.slice(0, 12);
+    }
+    else {
+        btn.classList.add('hidden');
+    }
+    for (const phone of phones) {
         console.log(phone);
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('phone', 'rounded-lg', 'shadow-lg');
@@ -57,12 +54,12 @@ function displayPhones(searchText) {
 
 };
 
-const searchPhone = async () => {
+const searchPhone = async (ishowAll) => {
     loadspiner(true);
     const searchField = document.getElementById('search-phn');
     const searchText = searchField.value;
-    searchField.value = '';
-    loadPhone(searchText);
+    // searchField.value = '';
+    loadPhone(searchText, ishowAll);
 };
 
 const loadspiner = (isLoading) => {
@@ -76,4 +73,8 @@ const loadspiner = (isLoading) => {
         loaderSection.classList.add('hidden');
 
     }
-}
+};
+const showAllbtn = () => {
+    searchPhone(true);
+};
+
