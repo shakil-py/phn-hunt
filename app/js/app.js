@@ -64,46 +64,60 @@ const loadPhoneDetails = async (slug) => {
 };
 const displayPhoneDetails = (phoneDetails) => {
     const modalTitle = document.getElementById('my_modal_1');
+
+    // Create the HTML for the sensors list
+    const sensors = phoneDetails.mainFeatures?.sensors;
+    const sensorsListHtml = sensors && sensors.length > 0
+        ? sensors.map(sensor => `<li>${sensor}</li>`).join('')
+        : '<li>No sensor information found</li>';
+
     modalTitle.innerHTML = `
     <div class="modal-box">
-    <h3 class="text-lg font-bold">${phoneDetails.name}</h3>
-    <img class="w-1/2 h-1/2 mt-5"   src=${phoneDetails.image} />
-    <p class="py-4">Release Date: ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'No release date found'}</p>
-    <p class="py-4">Storage: ${phoneDetails.mainFeatures ? phoneDetails.mainFeatures.storage : 'No storage information found'}</p>  
-    <p class="py-4">Bluetooth: ${phoneDetails.others ? phoneDetails.others.Bluetooth : 'No Bluetooth information found'}</p>
-    <div class="modal-action">
-        <form method="dialog">  
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
-        </form>
-    </div>  
+        <h3 class="text-lg font-bold">${phoneDetails.name}</h3>
+        <img class="w-1/2 h-1/2 mt-5"   src=${phoneDetails.image} />
+        
+        <h4 class="text-lg font-bold mt-4">Sensors:</h4>
+        <ul class="list-disc list-inside">
+            ${sensorsListHtml}
+        </ul>
+
+        <p class="py-4">Release Date: ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'No release date found'}</p>
+        <p class="py-4">Storage: ${phoneDetails.mainFeatures ? phoneDetails.mainFeatures.storage : 'No storage information found'}</p>  
+        <p class="py-4">Bluetooth: ${phoneDetails.others ? phoneDetails.others.Bluetooth : 'No Bluetooth information found'}</p>
+        <div class="modal-action">
+            <form method="dialog">  
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+            </form>
+        </div>  
     </div>
     `;
     modalTitle.showModal();
 }
 
-    const searchPhone = async (ishowAll) => {
-        loadspiner(true);
-        const searchField = document.getElementById('search-phn');
-        const searchText = searchField.value;
-        // searchField.value = '';
-        loadPhone(searchText, ishowAll);
-    };
+// data lodsection
+const searchPhone = async (ishowAll) => {
+    loadspiner(true);
+    const searchField = document.getElementById('search-phn');
+    const searchText = searchField.value;
+    // searchField.value = '';
+    loadPhone(searchText, ishowAll);
+};
 
-    const loadspiner = (isLoading) => {
-        const loaderSection = document.getElementById('loader');
-        // loaderSection.classList.remove('hidden');
-        if (isLoading) {
-            loaderSection.classList.remove('hidden');
+const loadspiner = (isLoading) => {
+    const loaderSection = document.getElementById('loader');
+    // loaderSection.classList.remove('hidden');
+    if (isLoading) {
+        loaderSection.classList.remove('hidden');
 
-        }
-        else {
-            loaderSection.classList.add('hidden');
+    }
+    else {
+        loaderSection.classList.add('hidden');
 
-        }
-    };
-    const showAllbtn = () => {
-        searchPhone(true);
-    };
+    }
+};
+const showAllbtn = () => {
+    searchPhone(true);
+};
 
-    loadPhone();
+loadPhone();
