@@ -1,5 +1,5 @@
 // console.log("hello world");
-const loadPhone = async (searchText, ishowAll) => {
+const loadPhone = async (searchText = "13", ishowAll) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await response.json();
     const phones = data.data;
@@ -9,6 +9,7 @@ const loadPhone = async (searchText, ishowAll) => {
 
 
 function displayPhones(phones, ishowAll) {
+    console.log(phones);
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
     const phonelength = phones.length;
@@ -27,7 +28,7 @@ function displayPhones(phones, ishowAll) {
         btn.classList.add('hidden');
     }
     for (const phone of phones) {
-        console.log(phone);
+
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('phone', 'rounded-lg', 'shadow-lg');
         phoneDiv.id = 'phone';
@@ -40,7 +41,7 @@ function displayPhones(phones, ishowAll) {
   <div class="card-body">
     <h2 class="flex justify-center m-10 card-title font-black text-black">${phone.phone_name}</h2>
     <div class=" card-actions justify-end">
-      <button onclick="displayPhoneDetails()" class="btn btn-primary w-full bg-amber-500 text-white 
+      <button onclick="loadPhoneDetails(${phone.slug})" class="btn btn-primary w-full bg-amber-500 text-white 
         
       }">showdetails</button>
     </div>
@@ -53,11 +54,12 @@ function displayPhones(phones, ishowAll) {
 
 
 };
-const loadPhoneDetails = async (id) => {
-    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+const loadPhoneDetails = async (slug) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayPhoneDetails(data.data);
+    const phoneDetails = data.data;
+    console.log(phoneDetails);
 };
 
 const searchPhone = async (ishowAll) => {
@@ -84,3 +86,4 @@ const showAllbtn = () => {
     searchPhone(true);
 };
 
+loadPhone();
