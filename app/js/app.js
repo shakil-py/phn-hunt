@@ -59,7 +59,7 @@ const loadPhoneDetails = async (slug) => {
     const res = await fetch(url);
     const data = await res.json();
     const phoneDetails = data.data;
-    // console.log(phoneDetails);
+    console.log(phoneDetails);
     displayPhoneDetails(phoneDetails);
 };
 const displayPhoneDetails = (phoneDetails) => {
